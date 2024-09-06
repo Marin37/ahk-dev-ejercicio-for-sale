@@ -1,0 +1,37 @@
+- inmobiliaria
+
+- persona 
+- empleado 
+- cliente 
+
+- operacion
+    - status: [abierta / reservada / concretada]
+    - @empleado {puede cambiar de empleado una publicación?}
+    - @cliente [nullable] 
+    - @inmueble
+    - tipo [venta / alquiler]
+    - inmueble (class)
+    - fecha (para ver que comision se usa)
+    - comision (depende de venta/alquiler)
+        - venta = value * 0,01% / 0,015%  [modularizado por año]
+        - alquiler = value / 50.000 * cant. meses
+            - cant. meses viene como dato al hacer el alquiler
+    * function reservar(cliente, venta/alquiler, fecha)
+        sets: status, cliente, tipo
+    * function
+
+- inmueble
+    - tamanio en m2
+    - valor
+    - cant ambientes [int]
+    - tipo [casa / dpto / ph]
+        - casa: valor
+        - depto: 350.000 * ambientes
+        - ph: 14.000 * m2, min 500.000
+        - local:
+            - galpon: valor / 2
+            - a la calle: valor + cte 
+            + no se puede vender, solo alquilar
+            + se puede cambiar de rubro remodelando
+    - zona % extra por zona [modularizado por zona]
+    - estado [ reservado / alquilado / vendido ]
