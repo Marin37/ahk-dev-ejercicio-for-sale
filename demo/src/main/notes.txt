@@ -33,5 +33,21 @@
             - a la calle: valor + cte 
             + no se puede vender, solo alquilar
             + se puede cambiar de rubro remodelando
-    - zona % extra por zona [modularizado por zona]
+    - zona + extra por zona [modularizado por zona]
     - estado [ reservado / alquilado / vendido ]
+
+clase 13/9
+    vemos otros métodos
+
+    - maqueta similar -> listado de inmuebles
+    - inmuebles controller
+
+    -añadir formulario para agregar
+tarea
+TODO
+investigar como hacer post desde un formulario html hacia una ruta en particular
+(zonazController -> post -> guardar dentro de la coleccion)
+
+- new vista FormularioZona
+- vistaZonas -> boton href FormularioZona
+- desde zonasController hacer fomulario con funciones

@@ -2,8 +2,8 @@ package com.ahk.arg.forsale.models.entities;
 
 public class Departamento extends Inmueble {
 
-    @Override
+       @Override
     public Float precio(){
-        return Float.valueOf(350000 + super.cantAmbientes);
+        return Float.valueOf(350000F * super.cantAmbientes);
     }
 }

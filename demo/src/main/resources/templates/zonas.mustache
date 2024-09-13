@@ -1,0 +1,168 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        nav {
+            background-color: #1e1e1e;
+            border-bottom: 1px solid #333;
+            padding: 10px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #00e676;
+            font-weight: bold;
+        }
+        nav ul li a:hover {
+            color: #00c853;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            color: #00e676;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .search-box {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .search-box input {
+            padding: 10px;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 5px;
+            border: 1px solid #333;
+            background-color: #2c2c2c;
+            color: #e0e0e0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #2c2c2c;
+            color: #00e676;
+        }
+        tr:nth-child(even) {
+            background-color: #2c2c2c;
+        }
+        tr:nth-child(odd) {
+            background-color: #1e1e1e;
+        }
+        tr:hover {
+            background-color: #333;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #00e676;
+            color: #121212;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #00c853;
+        }
+    </style>
+</head>
+<body>
+
+{{> header}}
+
+<div class="container">
+    <h1>Lista de Zonas</h1>
+
+    <!-- Campo de búsqueda -->
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Buscar por nombre, precio o ID..." onkeyup="filterTable()">
+    </div>
+
+    <table id="dataTable">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>ID</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- this executes as a for each -->
+        {{#zonas}}
+            <tr>
+                <td>{{nombre}}</td>
+                <td>{{precio}}</td>
+                <td>{{id}}</td>
+            </tr>
+        {{/zonas}}
+        <!-- Agrega más filas según sea necesario -->
+        </tbody>
+    </table>
+    <a href="#" class="btn">Añadir Zona</a>
+    <p style="margin-top: 20px;">😎</p> <!-- Emoji de sunglasses agregado -->
+</div>
+
+<script>
+    function filterTable() {
+        // Obtén el valor de búsqueda y conviértelo a minúsculas
+        var input = document.getElementById('searchInput');
+        var filter = input.value.toLowerCase();
+
+        // Obtén la tabla y sus filas
+        var table = document.getElementById('dataTable');
+        var rows = table.getElementsByTagName('tr');
+
+        // Recorre todas las filas de la tabla
+        for (var i = 1; i < rows.length; i++) { // Empieza en 1 para evitar el encabezado
+            var cells = rows[i].getElementsByTagName('td');
+            var found = false;
+
+            // Recorre todas las celdas de la fila
+            for (var j = 0; j < cells.length; j++) {
+                if (cells[j].innerText.toLowerCase().indexOf(filter) > -1) {
+                    found = true;
+                    break;
+                }
+            }
+
+            // Muestra u oculta la fila basada en el filtro
+            rows[i].style.display = found ? '' : 'none';
+        }
+    }
+</script>
+</body>
+</html>
