@@ -1,0 +1,69 @@
+{{#layout}}
+    <h1>Lista de Inmuebles</h1>
+
+    <!-- Campo de búsqueda -->
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Buscar por nombre, dirección, precio o ID..." onkeyup="filterTable()">
+    </div>
+
+    <table id="dataTable">
+        <thead>
+        <tr>
+            <th>Precio</th>
+            <th>Ambientes</th>
+            <th>Tamanio</th>
+            <th>Zona</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- this executes as a for each -->
+        {{#inmuebles}}
+            <tr>
+                <td>{{precio}}</td>
+                <td>{{cantAmbientes}}</td>
+                <td>{{tamanioM2}}</td>
+                <td>{{zona.nombre}}</td>
+            </tr>
+        {{/inmuebles}}
+        <!-- Agrega más filas según sea necesario -->
+        </tbody>
+    </table>
+    <!-- Agregar un Inmueble -->
+    <a href="/inmuebles/inmuebleForm"
+       class="btn"
+       onclick="showPopup()">Añadir Inmueble</a>
+    <!-- Popup Message -->
+    <div id="popupMessage" class="popup-message" style="display: none;">
+        <span class="popup-icon"></span>Inmueble creado correctamente
+    </div>
+
+    <script>
+        function filterTable() {
+            // Obtén el valor de búsqueda y conviértelo a minúsculas
+            var input = document.getElementById('searchInput');
+            var filter = input.value.toLowerCase();
+
+            // Obtén la tabla y sus filas
+            var table = document.getElementById('dataTable');
+            var rows = table.getElementsByTagName('tr');
+
+            // Recorre todas las filas de la tabla
+            for (var i = 1; i < rows.length; i++) { // Empieza en 1 para evitar el encabezado
+                var cells = rows[i].getElementsByTagName('td');
+                var found = false;
+
+                // Recorre todas las celdas de la fila
+                for (var j = 0; j < cells.length; j++) {
+                    if (cells[j].innerText.toLowerCase().indexOf(filter) > -1) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                // Muestra u oculta la fila basada en el filtro
+                rows[i].style.display = found ? '' : 'none';
+            }
+        }
+    </script>
+{{/layout}}
+{{>common/layout}}

@@ -1,0 +1,98 @@
+{{#layout}}
+
+    <h1>Lista de Zonas</h1>
+
+    <!-- Campo de búsqueda -->
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Buscar por nombre, precio o ID..." onkeyup="filterTable()">
+    </div>
+
+    <table id="dataTable">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>ID</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- this executes as a for each -->
+        {{#zonas}}
+            <tr>
+                <td>{{nombre}}</td>
+                <td>{{precio}}</td>
+                <td>{{id}}</td>
+            </tr>
+        {{/zonas}}
+        </tbody>
+    </table>
+
+    <!-- Agregar una Zona -->
+    <a href="/zonas/agregarZona"
+       class="btn"
+       onclick="showPopup()">Añadir Zona</a>
+    <!-- Popup Message -->
+    <div id="popupMessage" class="popup-message" style="display: none;">
+        <span class="popup-icon"></span>Zona creada correctamente
+    </div>
+
+    <script>
+        function filterTable() {
+            // Obtén el valor de búsqueda y conviértelo a minúsculas
+            var input = document.getElementById('searchInput');
+            var filter = input.value.toLowerCase();
+
+            // Obtén la tabla y sus filas
+            var table = document.getElementById('dataTable');
+            var rows = table.getElementsByTagName('tr');
+
+            // Recorre todas las filas de la tabla
+            for (var i = 1; i < rows.length; i++) { // Empieza en 1 para evitar el encabezado
+                var cells = rows[i].getElementsByTagName('td');
+                var found = false;
+
+                // Recorre todas las celdas de la fila
+                for (var j = 0; j < cells.length; j++) {
+                    if (cells[j].innerText.toLowerCase().indexOf(filter) > -1) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                // Muestra u oculta la fila basada en el filtro
+                rows[i].style.display = found ? '' : 'none';
+            }
+        }
+
+        function showPopup() {
+            var popup = document.getElementById('popupMessage');
+            popup.style.display = 'block';
+
+            setTimeout(function() {
+                popup.style.display = 'none';
+            }, 5000); // Duración del popup
+        }
+
+        function checkURLAndShowPopup() {
+            const currentURL = window.location.pathname; // Obtiene la ruta de la URL
+
+            // Verifica si la URL contiene el patrón deseado
+            if (currentURL.includes('true')) {
+                showPopup()
+            }
+        }
+
+        function showPopup() {
+            var popup = document.getElementById('popupMessage');
+            popup.style.display = 'block';
+
+            setTimeout(function() {
+            popup.style.display = 'none';
+            }, 5000); // Duración del popup
+        }
+
+        window.onload = checkURLAndShowPopup();
+
+    </script>
+{{/layout}}
+{{>common/layout}}

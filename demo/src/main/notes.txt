@@ -51,3 +51,16 @@ investigar como hacer post desde un formulario html hacia una ruta en particular
 - new vista FormularioZona
 - vistaZonas -> boton href FormularioZona
 - desde zonasController hacer fomulario con funciones
+
+
+en el Controller de Inmuebles vamos a necesitar
+crear 3 metodos anotados con @PostMapping
+Por ejemplo:
+- /casa/guardar
+    (recibe una casa)
+- /ph/guardar
+    (recibe un ph)
+- /depto/guardar
+    (recibe un depto)
+Lo que varia en cada uno de estos metodos
+es el parametro anotado con @ModelAttribute

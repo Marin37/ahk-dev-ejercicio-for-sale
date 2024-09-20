@@ -1,0 +1,18 @@
+{{#layout}}
+
+    <h1>Formulario de Agregar Zona</h1>
+    <form action="/zonas/guardar" method="post">
+        <label for="id">ID</label>
+        <input type="number" id="id" name="id" required>
+
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label for="precio">Precio</label>
+        <input type="number" id="precio" name="precio" step="0.01" required>
+
+        <button id="submit" type="submit">Guardar</button>
+    </form>
+
+{{/layout}}
+{{>common/layout}}

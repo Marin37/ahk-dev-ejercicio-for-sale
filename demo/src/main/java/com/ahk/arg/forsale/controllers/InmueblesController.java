@@ -20,6 +20,10 @@ public class InmueblesController {
 
     public InmueblesController() {
 
+        inmueblesTest();
+    }
+
+    private void inmueblesTest() {
         Zona zonaUno = new Zona("Juanma", 250000F,1);
         Zona zonaDos = new Zona("Palermo",500000F,34);
         Zona zonaTres = new Zona("Liniers",100000F,47);
@@ -52,9 +56,15 @@ public class InmueblesController {
     @GetMapping
     public ModelAndView listadoDeInmuebles(Map<String, Object> model) {
 
-        model.put("title", "Inmuebles");
+        model.put("title", "Lista de Inmuebles");
         model.put("inmuebles", this.inmuebles);
-        return new ModelAndView("inmuebles", model);
+        return new ModelAndView("inmueble/inmuebles", model);
     }
 
+    // Formulario para agregar Imueble
+    @GetMapping("/inmuebleForm")
+    public ModelAndView mostrarFormularioAgregarInmueble(Map<String, Object> model) {
+        model.put("title","Agregar Inmueble");
+        return new ModelAndView("inmueble/inmuebleForm",model);
+    }
 }
